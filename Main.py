@@ -18,6 +18,8 @@ v6 = IntVar()
 v7 = str()
 v8 = str()
 
+bigboi = str()
+
 def update():
     lbl=Label(window,
      text=
@@ -30,40 +32,48 @@ def update():
     fg='black', font=("Helvetica", 16))
     lbl.place(x=60, y=270)
 
+    global bigboi
+    bigboi = v1.get() + v2.get() + v3.get() + v4.get() + v5.get() + v6.get()
+
+    print (bigboi)
 
 def create():
     customer = C8.get()
     project = C9.get()
-    if project != '':
-        if customer == '':
-            os.mkdir(project)
-            os.chdir(project)
-            catalogcreator()
-            os.chdir(directory)
-            ready()
+    if bigboi != 0:
+        if project != '':
+            if customer == '':
+                os.mkdir(project)
+                os.chdir(project)
+                catalogcreator()
+                os.chdir(directory)
+                ready()
 
-        elif customer != '':
-            os.mkdir(customer + ' - ' + project)
-            os.chdir(customer + ' - ' + project)
-            catalogcreator()
-            os.chdir(directory)
-            ready()
-    elif project == '':
-        messagebox.showerror('ERROR','You need to input something!')
+            elif customer != '':
+                os.mkdir(customer + ' - ' + project)
+                os.chdir(customer + ' - ' + project)
+                catalogcreator()
+                os.chdir(directory)
+                ready()
+        elif project == '':
+            messagebox.showerror('ERROR','You need to input something!')
+    elif bigboi == 0:
+        messagebox.showerror('ERROR',"You can't just create a empty folder!")
 
 def catalogcreator():
-   if v1.get() == 1:
-    os.mkdir ('Textures')
-   if v2.get() == 1:
-    os.mkdir ('Exports')
-   if v3.get() == 1:
-    os.mkdir ('Images')
-   if v4.get() == 1:
-    os.mkdir ('Documents')
-   if v5.get() == 1:
-    os.mkdir ('Alphas')
-   if v6.get() == 1:
-    os.mkdir ('Renders')
+        if v1.get() == 1:
+            os.mkdir ('Textures')
+        if v2.get() == 1:
+            os.mkdir ('Exports')
+        if v3.get() == 1:
+            os.mkdir ('Images')
+        if v4.get() == 1:
+            os.mkdir ('Documents')
+        if v5.get() == 1:
+            os.mkdir ('Alphas')
+        if v6.get() == 1:
+            os.mkdir ('Renders')
+
 
 def ready():
     messagebox.showinfo('Project Manager','Your folders are ready!', command = window.destroy())
